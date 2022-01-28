@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import CardList from './components/cardlist/CardList';
+import Searchbox from './components/searchbox/Searchbox';
+import './App.css'
 
 class App extends Component {
 
@@ -19,6 +21,10 @@ class App extends Component {
     // console.log('Inside component did mount');
   }
 
+  handleChange = (e) => {
+    this.setState({searchText: e.target.value}, () => console.log(this.state.searchText));
+  }
+
   render() {
     // console.log('Inside render');
     const {users, searchText} = this.state;
@@ -27,9 +33,7 @@ class App extends Component {
 
     return (
         <div className='app'>
-          <input type='search' placeholder='Search users' onChange={(e) => {
-              this.setState({searchText: e.target.value}, () => console.log(this.state.searchText));
-            }} />
+          <Searchbox handleChange={this.handleChange} placeholder={'Search users'} />
           <CardList users={filterUsers} />
         </div>
     )
